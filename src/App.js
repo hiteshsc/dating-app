@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
-function App() {
+import Login  from "./views/Login"
+import Register  from "./views/Register"
+import Signup from "./views/Signup";
+import Welcome  from "./views/Welcome-home"
+import Otp from "./views/Otp";
+import Home from "./views/UI";
+export default function App() {
+  let preLoginList = ["/", "/login", "/register"];
+  let location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-secondary">
+    
+
+      {preLoginList.includes(location.pathname) ? (
+        <div>
+          <Link to="/">Login | </Link>
+          <Link to="/register">Register</Link>
+        </div>
+      ) : (
+        <div>
+          <Link to="/Welcome-home">Home | </Link>
+          <Link to="/Welcome-home">Explore | </Link>
+          <Link to="/Welcome-home">Home</Link>
+        </div>
+      )}
+
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/Signup" element={<Signup></Signup>}></Route>
+        <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="/enterOtp" element={<Otp></Otp>}></Route>
+        <Route path="/Welcome-home" element={<Welcome></Welcome>}></Route>
+      </Routes>
     </div>
   );
 }
-
-export default App;
